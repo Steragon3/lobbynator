@@ -1,8 +1,7 @@
 @import 'base/_reset.scss';
 @import 'utils/vars.scss';
 @import 'utils/breakpoint.scss';
+@import 'layout/_main_grid';
+@import 'layout/_filter.scss';
+@import 'components/_button.scss';
 
-h1{
-    color: $green;
-    color: pink;
-}
