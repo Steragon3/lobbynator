@@ -2,12 +2,12 @@
 @import 'utils/vars.scss';
 @import 'utils/breakpoint.scss';
 @import 'layout/_header.scss';
+@import 'layout/_main_grid';
+@import 'layout/_filter.scss';
+@import 'layout/_profile.scss';
+@import 'components/_button.scss';
 @import 'layout/_lobbies.scss';
 
-h1{
-    color: $green;
-    color: pink;
-}
 @font-face {
     font-family: 'Snes';
     src: url('../fonts/snes-font(1)/Snes.ttf'); /* IE9 Compat Modes */
