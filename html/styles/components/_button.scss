@@ -57,3 +57,36 @@ button._btn_floating{
     bottom: 5%;
     left: 5%;
 }
+
+
+button._btn_imagebtn{
+    background-color: transparent;
+    border: none;
+    img.img_submitimg{
+    }
+}
+
+.after_mobile{
+    display: none;
+    @include breakpoint(tablet){
+        display: initial;
+    }
+}
+
+.after_tablet{
+    display: none;
+    @include breakpoint(desktop1){
+        display: initial;
+    }
+}
+
+.till_tablet{
+    @include breakpoint(tablet){
+        display: none;
+    }
+}
+.till_desktop{
+    @include breakpoint(desktop1){
+        display: none;
+    }
+}
