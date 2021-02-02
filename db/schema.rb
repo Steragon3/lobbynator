@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_25_084703) do
+ActiveRecord::Schema.define(version: 2021_02_02_083010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,50 @@ ActiveRecord::Schema.define(version: 2021_01_25_084703) do
 
   create_table "cats", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "chatmessages", force: :cascade do |t|
+    t.string "text"
+    t.bigint "users_id"
+    t.bigint "lobbies_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lobbies_id"], name: "index_chatmessages_on_lobbies_id"
+    t.index ["users_id"], name: "index_chatmessages_on_users_id"
+  end
+
+  create_table "filtercategories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "filters", force: :cascade do |t|
+    t.string "name"
+    t.bigint "filter_category_id"
+    t.bigint "true_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["filter_category_id"], name: "index_filters_on_filter_category_id"
+    t.index ["true_id"], name: "index_filters_on_true_id"
+  end
+
+  create_table "lobbies", force: :cascade do |t|
+    t.string "name"
+    t.string "descripton"
+    t.bigint "users_id"
+    t.bigint "true_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["true_id"], name: "index_lobbies_on_true_id"
+    t.index ["users_id"], name: "index_lobbies_on_users_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
