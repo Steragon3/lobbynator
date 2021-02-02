@@ -38,7 +38,9 @@ textarea{
             margin-bottom: 10px;
             border-radius: 0.7rem;
             border: 1px solid #62606E;
+            background-color: transparent;
             width: 5vw;
+            min-width: 50px;
             -moz-appearance: none;
             -webkit-appearance: none;
             appearance: none;

@@ -1,6 +1,6 @@
 section._section_filtercontainer{
     @include breakpoint(tablet){
-        align-self: flex-end;
+        align-self: center;
     }
 
     ul._ul_filtercategories{
