@@ -9,7 +9,7 @@
     font-family: 'Roboto';
     text-transform: uppercase;
     max-width: 250px;
-
+    width: fit-content;
     @include breakpoint(tablet){
         font-size: 1.8rem;
         padding: 7px 15px;
@@ -29,7 +29,7 @@
     font-family: 'Roboto';
     text-transform: uppercase;
     max-width: 250px;
-
+    width: fit-content;
     @include breakpoint(tablet){
         font-size: 1.3rem;
         padding: 4px 10px;
