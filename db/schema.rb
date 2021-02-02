@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_02_083010) do
+ActiveRecord::Schema.define(version: 2021_02_02_142038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,23 +60,27 @@ ActiveRecord::Schema.define(version: 2021_02_02_083010) do
 
   create_table "filters", force: :cascade do |t|
     t.string "name"
-    t.bigint "filter_category_id"
+    t.bigint "filtercategory_id"
     t.bigint "true_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["filter_category_id"], name: "index_filters_on_filter_category_id"
+    t.index ["filtercategory_id"], name: "index_filters_on_filtercategory_id"
     t.index ["true_id"], name: "index_filters_on_true_id"
   end
 
   create_table "lobbies", force: :cascade do |t|
     t.string "name"
-    t.string "descripton"
-    t.bigint "users_id"
-    t.bigint "true_id"
+    t.string "description"
+    t.bigint "user_id"
+    t.datetime "date", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["true_id"], name: "index_lobbies_on_true_id"
-    t.index ["users_id"], name: "index_lobbies_on_users_id"
+    t.index ["user_id"], name: "index_lobbies_on_user_id"
+  end
+
+  create_table "lobbies_users", id: false, force: :cascade do |t|
+    t.bigint "lobby_id", null: false
+    t.bigint "user_id", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -87,4 +91,5 @@ ActiveRecord::Schema.define(version: 2021_02_02_083010) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "lobbies", "users"
 end
