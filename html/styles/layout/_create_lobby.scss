@@ -12,7 +12,7 @@ textarea{
         border: 1px solid black;
         box-shadow: 4px 5px 10px black;
     }
-    .nameContainer{
+    .nameContainer, .gameContainer, .descriptionContainer, .maxPlayerContainer{
         text-align: left;
         label{
             font-family: Roboto;
@@ -28,37 +28,34 @@ textarea{
             width: 100%;
             border-bottom: 1px solid black;
             &:focus, input[type]:focus{
+                outline: none;
+            }
+        }
+        .select-wrapper select{
+            font-family: 'Roboto';
+            font-size: 1.5rem;
+            padding: 5px 10px;
+            margin-bottom: 10px;
+            border-radius: 0.7rem;
+            border: 1px solid #62606E;
+            width: 5vw;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+            margin-top: 1.3vh;
+            &:focus, &:active {
+                border-radius: 0.7rem;
+                border: 2px solid $green;
                 outline: none;
             }
         }
     }
-    .gameContainer{
-        text-align: left;
-        label{
-            font-family: Roboto;
-            font-size: 2rem;
-        }
-        input{
-            font-size: 1.5rem;
-            height: 5vh;
-            border-top: none;
-            border-right: none;
-            border-left: none;
-            margin-top: 1vh;
-            width: 100%;
-            border-bottom: 1px solid black;
-            &:focus, input[type]:focus{
-                outline: none;
-            }
-        }
+    .maxPlayerContainer{
+        margin-top: 1.7vh;
     }
     .descriptionContainer{
         text-align: left;
-        margin-top: 3vh;
-        label{
-            font-family: Roboto;
-            font-size: 2rem;
-        }
+        margin-top: 1.7vh;
         textarea{
             margin-top: 2vh;
             font-size: 1.5rem;
