@@ -44,12 +44,12 @@ ActiveRecord::Schema.define(version: 2021_02_03_170706) do
 
   create_table "chatmessages", force: :cascade do |t|
     t.string "text"
-    t.bigint "users_id"
-    t.bigint "lobbies_id"
+    t.bigint "lobby_id"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["lobbies_id"], name: "index_chatmessages_on_lobbies_id"
-    t.index ["users_id"], name: "index_chatmessages_on_users_id"
+    t.index ["lobby_id"], name: "index_chatmessages_on_lobby_id"
+    t.index ["user_id"], name: "index_chatmessages_on_user_id"
   end
 
   create_table "filtercategories", force: :cascade do |t|
@@ -107,5 +107,7 @@ ActiveRecord::Schema.define(version: 2021_02_03_170706) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "chatmessages", "lobbies"
+  add_foreign_key "chatmessages", "users"
   add_foreign_key "lobbies", "users"
 end
