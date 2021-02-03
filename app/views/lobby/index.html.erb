@@ -1,8 +1,78 @@
-<p id="notice"><%= notice %></p>
+<header>
+    <h1 class="headerHeading">Lobbynator</h1>
+    <div class="_div_heading_middle">
+        <button class="_btn_header till_desktop openfilters">Filters</button>
+        <% @categories.each do |cat| %>
+          <button class="_btn_header after_tablet openfilters _btn_cat">
+              <%= cat.name %>
+          </button>
+        <% end %>
+    </div>
+    <nav>
+        <div class="burger">
+            <div class="burgerelement line1"></div>
+            <div class="burgerelement line2"></div>
+            <div class="burgerelement line3"></div>
+        </div>
+    </nav>
+</header>
+<ul class="nav-links">
+    <li><a href="profile.html">Profile</a></li>
+    <li><a href="#">Log out</a></li>
+</ul>
+<section class="_section_pagemeta disabled">
+    <div>
+        <div class="_div_flexwrap">
+          <% @categories.each do |cat| %>
+            <button class="_btn_header till_desktop _btn_cat2">
+                <%= cat.name %>
+            </button>
+          <% end %>
+        </div>
 
-<h1>Lobbies</h1>
+        <input type="text" placeholder="Filter Tags" id="filtersearch">  
+        
+        <% @categories.each do |cat| %>
+          <div class="_div_filterlist _div_filtercategory disabled">
+            <% cat.filters.each do |filter| %>
+              <% if current_user.filters.include?(filter) %>
+                <p class="_p_info _p_filterelement selected"><%= filter.name %></p>
+              <% else %>
+                <p class="_p_info _p_filterelement"><%= filter.name %></p>
+              <% end %>
+              
+            <% end %>
+          </div>
+        <% end %>
+        <div class="_div_filterlist" id="selectedFilters">
+          <%
+=begin%>
+ <% current_user.filters.each do |selectedfilter| %>
+            <p class="_p_info _p_filterelement selected immutable"><%= selectedfilter.name %></p>
+          <% end %> 
+<%
+=end%>
+        </div>
+    </div>
+    <div class="_div_flexaround">
+        <button class="_btn_header" id="closefilters">Close</button>
+        
+        <%= form_with model: @lobby, url: "/applyfilters" do |form| %>  
 
-<%= link_to 'New Lobby', new_lobby_path, class: "buttonlike" %>
+          <div id="selectedform" class="disabled">
+          <input type ="text" name="filter[]">         
+          <input type ="text" name="filter[]">         
+          </div>
+          
+          <button type="submit" class="_btn_header" id="applyfilters">Apply</button> 
+        <% end %>
+    </div>
+</section>
+<%
+=begin%>
+ <%= link_to 'New Lobby', new_lobby_path, class: "buttonlike" %> 
+<%
+=end%>
 
 <% if user_signed_in? %>
    <% @lobbies.each do |lobby| %>
@@ -20,6 +90,8 @@
   </p>  
 <% end %>        
 <% end %>
+
+<%= javascript_pack_tag 'filter', media: 'all', 'data-turbolinks-track': 'reload' %> 
 
 
 

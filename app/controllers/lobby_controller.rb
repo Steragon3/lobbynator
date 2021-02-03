@@ -7,7 +7,14 @@ class LobbyController < ApplicationController
     redirect_to root_path
   end
     def index
-      @lobbies = Lobby.all
+      @lobbies = Lobby.all.select { |lobby| lobby.filters.all? { |f| current_user.filters.any?(f)}}
+      # @lobbies.each do |lobby|
+      #   if(current_user.filters.any? { |f| lobby.filters.include?(f) == false})
+      #     @lobbies.
+      #   end
+      # end
+      @categories = Filtercategory.all
+
     end
     
     def show
