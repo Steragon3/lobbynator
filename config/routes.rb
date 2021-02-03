@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   #leave lobby
   post 'leave' => 'lobby#leave'
 
+  post 'applyfilters' => 'users#applyfilters'
+
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: 'lobby#index'

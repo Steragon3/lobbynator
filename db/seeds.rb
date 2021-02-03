@@ -1,7 +1,7 @@
 cat = Filtercategory.create(name: "Game")
 
-cat.filters.create(name: "Counter Strike")
-cat.filters.create(name: "League of Legends")
+strikt = cat.filters.create(name: "Counter Strike")
+lol = cat.filters.create(name: "League of Legends")
 cat.filters.create(name: "Among Us")
 cat.filters.create(name: "Need for Speed")
 
@@ -21,11 +21,21 @@ cat4.filters.create(name: "Intermediate")
 cat4.filters.create(name: "Expert")
 cat4.filters.create(name: "E-Sports Champion")
 
-feci = User.create(username: "Baller", email: "mann@malle.com", password: "123456")
-stef = User.create(username: "Stef", email: "asdf@asdf.com", password: "123456")
+feci = User.create(username: "Feci", email: "feci@lobby.com", password: "test123")
+stef = User.create(username: "Stef", email: "stef@lobby.com", password: "test123")
+
+feci.filters.push(strikt)
+stef.filters.push(lol)
 
 l = Lobby.create(name: "Lobby 1", description: "Feci carrien", user: feci, eventdate: Time.now)
 l2 = Lobby.create(name: "Lobby 2", description: "Feci carrien sonntags", user: feci, eventdate: Time.now)
+l3 = Lobby.create(name: "Lobby 3", description: "Feci carrien samstags", user: feci, eventdate: Time.now)
+
+l.filters.push(strikt)
+l2.filters.push(lol)
+
+l3.filters.push(lol)
+l3.filters.push(strikt)
 
 l.users.push(feci)
 l.users.push(stef)
@@ -33,3 +43,4 @@ l2.users.push(stef)
 
 l.save()
 l2.save()
+l3.save()
