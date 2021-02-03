@@ -2,7 +2,7 @@
 
 <h1>Lobbies</h1>
 
-<%= link_to 'New Cat', new_cat_path, class: "buttonlike" %>
+<%= link_to 'New Lobby', new_lobby_path, class: "buttonlike" %>
 
 
 <% @lobbies.each do |lobby| %>
@@ -13,9 +13,6 @@
     <%= link_to 'Edit', edit_lobby_path(lobby), class: "buttonlike" %>
     <%= link_to 'Destroy', lobby, class: "buttonlike", method: :delete, data: { confirm: 'Are you sure?' } %>      
   </p>  
- 
-
 <% end %>
-
 
 

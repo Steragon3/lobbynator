@@ -4,7 +4,7 @@ class CreateLobbies < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :description
       t.references :user, foreign_key: true
-      t.datetime :date, null: false
+      t.date :date, null: true
       t.timestamps
     end
   end

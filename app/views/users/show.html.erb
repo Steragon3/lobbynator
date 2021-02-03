@@ -1,0 +1,15 @@
+<%= @user.username %>
+<%= button_to "Edit User", edit_user_registration_path, class: "myButtonClass" %>
+
+<h2>Your Lobbies</h2>
+<% @joinedLobbies.each do |lobby| %>
+  <h1><%= lobby.name %></h1>
+  <h1><%= lobby.user.username%></h1>
+  <p>
+    <%= link_to 'Show', lobby, class: "buttonlike" %>
+    <% if current_user.id == lobby.user.id %>
+        <%= link_to 'Edit', edit_lobby_path(lobby), class: "buttonlike" %>
+        <%= link_to 'Destroy', lobby, class: "buttonlike", method: :delete, data: { confirm: 'Are you sure?' } %>      
+    <% end %>
+  </p>  
+<% end %>
