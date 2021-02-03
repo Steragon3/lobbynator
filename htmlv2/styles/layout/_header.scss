@@ -39,6 +39,7 @@ header{
 }
 .nav-links{
     position: fixed;
+    z-index: 20;
     height: 20vh;
     width: 50%;
     background-color: white;

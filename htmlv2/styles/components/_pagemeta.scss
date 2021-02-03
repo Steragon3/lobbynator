@@ -7,6 +7,7 @@ section._section_pagemeta{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: height 1s;
 
     @include breakpoint(desktop1){
         position: relative;
@@ -29,11 +30,6 @@ section._section_pagemeta{
         display: flex;
         justify-content: flex-start;
         flex-wrap: wrap;
-
-        &:nth-of-type(2){
-            border-bottom: 1px solid white;
-            margin-bottom: 10px;
-        }
         @include breakpoint(tablet){
             width: 90%;
         }
@@ -45,11 +41,20 @@ section._section_pagemeta{
                 content: 'X';
             }
         }
+        & .hidden{
+            display: none;
+        }
         p{
             margin:0px 10px 10px 0px;
+        }     
+        
+        &:last-child{
+            border-top: 1px solid white;
+            padding-top: 10px;
         }
-
-       
+    }
+    div.disabled{
+        display: none;
     }
 }
 
@@ -63,6 +68,9 @@ section._section_pagemeta{
     width: 95%;
 }
 
+div.disabled{
+    display: none;
+}
 section.disabled{
     display: none;
 }
