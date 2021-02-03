@@ -29,11 +29,39 @@ class LobbyController < ApplicationController
     def edit
     end
 
+    def join
+      puts join_params
+      Rails.logger.warn("will find lobby")
+      @lobby = Lobby.find(join_params)
+      Rails.logger.warn("will push current_user #{current_user}")
+      @lobby.users.push(current_user)
+      Rails.logger.warn("root_path #{root_path}")
+      redirect_to root_path, notice: "Lobby was successfully joined."
+
+      # respond_to do |format|
+      #   format.html { Rails.logger.warn("root_path #{root_path}"); redirect_to @lobby, notice: "Lobby was successfully destroyed." }
+      #   format.json { head :no_content }
+      # end
+      
+    end
+
+    def leave
+      @lobby = Lobby.find(join_params)
+      @lobby.users.delete(current_user)
+
+      Rails.logger.warn("root_path #{root_path}")
+      redirect_to root_path, notice: "Lobby was successfully destroyed."
+
+      #respond_to do |format|
+      #  format.html {Rails.logger.warn("root_path #{root_path}"); redirect_to @lobby, notice: "Lobby was successfully destroyed." }
+      #  format.json { head :no_content }
+      #end
+    end
+
     def create
-      puts @lobby
       @lobby = Lobby.new(lobby_params)
       @lobby.user = current_user
-      @lobby.date = lobby_params["date"].to_date
+     # @lobby.date = lobby_params["date"]
       @lobby.users.push(current_user)
       respond_to do |format|
         if @lobby.save
@@ -55,6 +83,10 @@ class LobbyController < ApplicationController
     # Only allow a list of trusted parameters through.
     def lobby_params
       params.require(:lobby).permit(:name, :description, :user, :date)
+    end
+
+    def join_params
+      params.require(:lobby)
     end
 
 end
