@@ -11,6 +11,7 @@ class LobbyController < ApplicationController
     end
     
     def show
+      @lobbies = Lobby.all
     end
 
     def new
@@ -30,32 +31,15 @@ class LobbyController < ApplicationController
     end
 
     def join
-      puts join_params
-      Rails.logger.warn("will find lobby")
       @lobby = Lobby.find(join_params)
-      Rails.logger.warn("will push current_user #{current_user}")
       @lobby.users.push(current_user)
-      Rails.logger.warn("root_path #{root_path}")
-      redirect_to root_path, notice: "Lobby was successfully joined."
-
-      # respond_to do |format|
-      #   format.html { Rails.logger.warn("root_path #{root_path}"); redirect_to @lobby, notice: "Lobby was successfully destroyed." }
-      #   format.json { head :no_content }
-      # end
-      
+      redirect_to root_path, notice: "Lobby was successfully joined."    
     end
 
     def leave
       @lobby = Lobby.find(join_params)
       @lobby.users.delete(current_user)
-
-      Rails.logger.warn("root_path #{root_path}")
       redirect_to root_path, notice: "Lobby was successfully destroyed."
-
-      #respond_to do |format|
-      #  format.html {Rails.logger.warn("root_path #{root_path}"); redirect_to @lobby, notice: "Lobby was successfully destroyed." }
-      #  format.json { head :no_content }
-      #end
     end
 
     def create

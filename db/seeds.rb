@@ -21,11 +21,11 @@ cat4.filters.create(name: "Intermediate")
 cat4.filters.create(name: "Expert")
 cat4.filters.create(name: "E-Sports Champion")
 
-feci = User.create(username: "Baller", email: "mann@malle.com")
-stef = User.create(username: "Stef", email: "asdf@asdf.com")
+feci = User.create(username: "Baller", email: "mann@malle.com", password: "123456")
+stef = User.create(username: "Stef", email: "asdf@asdf.com", password: "123456")
 
-l = Lobby.create(name: "Lobby 1", description: "Feci carrien", user: feci, date: Time.now)
-l2 = Lobby.create(name: "Lobby 2", description: "Feci carrien sonntags", user: feci, date: Time.now)
+l = Lobby.create(name: "Lobby 1", description: "Feci carrien", user: feci, eventdate: Time.now)
+l2 = Lobby.create(name: "Lobby 2", description: "Feci carrien sonntags", user: feci, eventdate: Time.now)
 
 l.users.push(feci)
 l.users.push(stef)

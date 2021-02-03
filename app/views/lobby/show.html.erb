@@ -1,4 +1,42 @@
 <h1><%= @lobby.name %></h1>
+<p><%= @lobby.description %></p>
+
+<h2>Members:</h2>
+
+
+<% if user_signed_in? %>
+
+  <% @lobby.users.each do |lobby| %>
+    <%= lobby.username %><br>
+  <%end%>
+
+<%= form_with model: @chatmessage, url: "/chatmessage" do |form| %>
+
+  <%= form.hidden_field :lobby_id, value: @lobby.id%>
+
+  <div class="field">
+    <%= form.label :Chatmessage %>
+    <%= form.text_area :text, size: "70x5" %>
+  </div>
+  
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+<% @lobby.chatmessages.each do |textObject| %>
+    <%= textObject.text %>
+    <% a = textObject.created_at.strftime("%H:%M") %>
+    
+    
+    <%= a %><br>
+
+
+  <%end%>
+
+<% end %> 
 
 
 

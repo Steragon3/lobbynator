@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :cats
   resources :lobby
+  resources :chatmessage
   #resources :users, :path => "profile" ,only: [:show, :edit, :update]
   get 'users/:id' => 'users#show'
   #join lobby
