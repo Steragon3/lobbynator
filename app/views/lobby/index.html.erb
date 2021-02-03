@@ -18,7 +18,7 @@
 </header>
 <ul class="nav-links">
     <li><a href="profile.html">Profile</a></li>
-    <li><a href="#">Log out</a></li>
+    <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
 </ul>
 <section class="_section_pagemeta disabled">
     <div>
@@ -74,24 +74,33 @@
 <%
 =end%>
 
-<% if user_signed_in? %>
-   <% @lobbies.each do |lobby| %>
-  <h1><%= lobby.name %></h1>
-  <h1><%= lobby.user.username%></h1>
-  <p>
-    <%= link_to 'Show', lobby, class: "buttonlike" %>
-    <% if lobby.users.include?(current_user) %>
-      <h2>Already joined</h2>
-      <%= button_to 'Leave lobby', leave_path(:lobby => lobby), method: :post%>
-    <% else %>
-      <%= button_to 'Join', join_path(:lobby => lobby), method: :post%>
-      
-    <% end %>
-  </p>  
-<% end %>        
-<% end %>
+<main class="_main_grid">
+  <% @lobbies.each do |lobby| %>
+     <div class="_div_gridcard">
+        <div>
+            <h2 class="_h2_level2"><%= lobby.name%></h2>
+            <p class="_p_important">in 3 hours</p>
+            <p class="_p_info"><%= lobby.description %></p>
+            <div>
+              <% lobby.filters.each do |filter| %>
+                <p class="_p_info"><%= filter.name %></p>
+              <% end %>
+            </div>
+        </div>
+        <div class="_div_endFlex">
+            <% if lobby.users.include?(current_user) %>
+              <button class="_btn_important">View</button>
+            <% else %>
+              <button class="_btn_important">Join</button>
+            <% end %>
+            <p class="_p_lobbyfill">3/5 in Lobby</p>
+        </div>
+    </div>
+  <% end %>
+</main>
 
 <%= javascript_pack_tag 'filter', media: 'all', 'data-turbolinks-track': 'reload' %> 
+<%= javascript_pack_tag 'header', media: 'all', 'data-turbolinks-track': 'reload' %> 
 
 
 

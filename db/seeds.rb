@@ -29,6 +29,13 @@ stef.filters.push(lol)
 
 l = Lobby.create(name: "Lobby 1", description: "Feci carrien", user: feci, date: Time.now)
 l2 = Lobby.create(name: "Lobby 2", description: "Feci carrien sonntags", user: feci, date: Time.now)
+l3 = Lobby.create(name: "Lobby 3", description: "Feci carrien samstags", user: feci, date: Time.now)
+
+l.filters.push(strikt)
+l2.filters.push(lol)
+
+l3.filters.push(lol)
+l3.filters.push(strikt)
 
 l.users.push(feci)
 l.users.push(stef)
@@ -36,3 +43,4 @@ l2.users.push(stef)
 
 l.save()
 l2.save()
+l3.save()

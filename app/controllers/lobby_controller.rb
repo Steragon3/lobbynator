@@ -7,13 +7,13 @@ class LobbyController < ApplicationController
     redirect_to root_path
   end
     def index
-      @lobbies = Lobby.all.select { |lobby| lobby.filters.all? { |f| current_user.filters.any?(f)}}
-      # @lobbies.each do |lobby|
-      #   if(current_user.filters.any? { |f| lobby.filters.include?(f) == false})
-      #     @lobbies.
-      #   end
-      # end
-      @categories = Filtercategory.all
+
+      if user_signed_in?
+        @lobbies = Lobby.all.select { |lobby| current_user.filters.all? { |f| lobby.filters.include?(f)}}
+        @categories = Filtercategory.all
+      else
+        redirect_to new_user_session_path
+      end
 
     end
     
