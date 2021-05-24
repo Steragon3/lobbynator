@@ -1,6 +1,7 @@
-class Filtercategory < ApplicationRecord
-    validates :name, presence: true
-    validates :name, uniqueness: true
+# frozen_string_literal: true
 
-    has_many :filters
+class Filtercategory < ApplicationRecord
+  validates :name, presence: true
+  validates :name, uniqueness: true
+  has_many :filters
 end

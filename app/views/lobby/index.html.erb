@@ -1,14 +1,13 @@
 <header>
     <h1 class="headerHeading">Lobbynator</h1>
     <div class="_div_heading_middle">
-        <button class="_btn_header till_desktop openfilters">Filters</button>
         <% @categories.each do |cat| %>
           <button class="_btn_header after_tablet openfilters _btn_cat">
               <%= cat.name %>
           </button>
         <% end %>
     </div>
-        <button class="_btn_header">Create Lobby</button>
+    <%=  button_to 'New Lobby', "#{new_lobby_path}", class: "_btn_header after_tablet", method: :get %>
     <nav>
         <div class="burger">
             <div class="burgerelement line1"></div>
@@ -18,8 +17,10 @@
     </nav>
 </header>
 <ul class="nav-links">
-    <li><a>Profile</a></li>
-    <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+    <li><%= link_to "Profile",  user_registration_path+"/#{current_user.id}" ,method: :get %></li>
+    <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+    <li><%=  link_to 'New Lobby', "#{new_lobby_path}", class: "till_desktop", method: :get %></li>
+    <li class="till_desktop openfilters">Filters</li>
 </ul>
 <section class="_section_pagemeta disabled">
     <div>
@@ -46,17 +47,10 @@
           </div>
         <% end %>
         <div class="_div_filterlist" id="selectedFilters">
-          <%
-=begin%>
- <% current_user.filters.each do |selectedfilter| %>
-            <p class="_p_info _p_filterelement selected immutable"><%= selectedfilter.name %></p>
-          <% end %> 
-<%
-=end%>
         </div>
     </div>
     <div class="_div_flexaround">
-        <button class="_btn_header" id="closefilters">Close</button>
+        <button class="_btn_filter" id="closefilters">Close</button>
         
         <%= form_with model: @lobby, url: "/applyfilters" do |form| %>  
 
@@ -65,43 +59,57 @@
           <input type ="text" name="filter[]">         
           </div>
           
-          <button type="submit" class="_btn_header" id="applyfilters">Apply</button> 
+          <button type="submit" class="_btn_filter" id="applyfilters">Apply</button> 
         <% end %>
     </div>
 </section>
-<%
-=begin%>
- <%= link_to 'New Lobby', new_lobby_path, class: "buttonlike" %> 
-<%
-=end%>
-
-<main class="_main_grid">
-  <% @lobbies.each do |lobby| %>
-     <div class="_div_gridcard">
-        <div>
-            <h2 class="_h2_level2"><%= lobby.name%></h2>
-            <p class="_p_important">in 3 hours</p>
-            <p class="_p_info"><%= lobby.description %></p>
-            <div>
-              <% lobby.filters.each do |filter| %>
-                <p class="_p_info"><%= filter.name %></p>
-              <% end %>
-            </div>
-        </div>
-        <div class="_div_endFlex">
-            <% if lobby.users.include?(current_user) %>
-              <button class="_btn_important">View</button>
-            <% else %>
-              <button class="_btn_important">Join</button>
-            <% end %>
-            <p class="_p_lobbyfill">3/5 in Lobby</p>
-        </div>
-    </div>
+<% if @games.size == 0%>
+    <% notice = "No Lobies found" %>
   <% end %>
+<% if notice.present? %>
+<div><p id="notice"><%= notice %></p></div>
+<% end %>
+<main class="_main_grid">
+  
+  <% @games.each do |game| %>
+    <% if game.filter_image.present? %>
+      <div class="_div_gridcard _div_gridcard_image">
+        <%= image_tag url_for(game.filter_image) %>
+      </div>
+    <% end %>
+        <% @lobbies.select { |l| l.filters.include?(game) }.each do |lobby| %>
+        <div class="_div_gridcard">
+            <div>
+                <h2 class="_h2_level2"><%= lobby.name%></h2>
+                <p class="_p_important"><%= lobby.date.strftime("%d.%m") %> / <%= lobby.time %></p>
+                <p class="_p_text"><%= lobby.description %></p>
+                <div>
+                  <% lobby.filters.each do |filter| %>
+                    <p class="_p_text"><%= filter.name %></p>
+                  <% end %>
+                </div>
+            </div>
+            <div class="_div_endFlex">
+                <% if lobby.users.include?(current_user) %>
+                  <%= button_to 'View', lobby_path(lobby), class: '_btn_big', method: :get %>
+                <% else %>
+                  <% if lobby.users.size >= lobby.maxplayers%>
+                    <p>Lobby full</p>
+                  <% else %>
+                    <%= button_to 'Join', join_path(:lobby => lobby), method: :post, class: '_btn_big' %>
+                  <% end %>
+                <% end %>
+                <p class="maxPlayer"> 
+                  <%= lobby.users.size %>/<%= lobby.maxplayers %> joined
+                </p>
+            </div>
+            
+        </div>
+      <% end %>
+  <% end %>
+  
 </main>
 
-<%= javascript_pack_tag 'filter', media: 'all', 'data-turbolinks-track': 'reload' %> 
-<%= javascript_pack_tag 'header', media: 'all', 'data-turbolinks-track': 'reload' %> 
 
 
 
