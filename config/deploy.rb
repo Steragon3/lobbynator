@@ -2,7 +2,7 @@
 lock "~> 3.16.0"
 
 set :application, "lobbynator"
-set :repo_url, "git@github.com:FelixFelbermayer/LobbyNator.git"
+set :repo_url, "git@github.com:Steragon3/lobbynator.git"
 
 set :deploy_to, "/var/www/#{fetch :application}"
 

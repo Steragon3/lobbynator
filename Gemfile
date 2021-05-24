@@ -22,6 +22,7 @@ gem "devise"
 gem "rubocop", require: false
 ##
 gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
+
 gem "jbuilder", "~> 2.7"
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
@@ -34,8 +35,6 @@ gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
 gem 'capistrano-postgresql', '~> 6.2'
 gem 'ed25519', '>= 1.2', '< 2.0'
 gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
-
-
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
