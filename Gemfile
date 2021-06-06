@@ -18,6 +18,8 @@ gem "turbolinks", "~> 5"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # Use devise for login and authentication
 gem "devise"
+gem 'ddtrace'
+
 
 gem "rubocop", require: false
 ##
